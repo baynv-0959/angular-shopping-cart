@@ -18,7 +18,8 @@ export class InMemoryDataService implements InMemoryDbService {
         "installments": 9,
         "currencyId": "USD",
         "currencyFormat": "$",
-        "isFreeShipping": true
+        "isFreeShipping": true,
+        "img": ["img-1.jpg", "img-2.jpg"]
       },
 
       {
@@ -32,7 +33,8 @@ export class InMemoryDataService implements InMemoryDbService {
         "installments": 5,
         "currencyId": "USD",
         "currencyFormat": "$",
-        "isFreeShipping": true
+        "isFreeShipping": true,
+        "img": ["img-3.jpg", "img-4.jpg"]
       },
 
       {
@@ -46,7 +48,8 @@ export class InMemoryDataService implements InMemoryDbService {
         "installments": 3,
         "currencyId": "USD",
         "currencyFormat": "$",
-        "isFreeShipping": true
+        "isFreeShipping": true,
+        "img": ["img-5.jpg", "img-6.jpg"]
       },
 
       {
@@ -60,7 +63,8 @@ export class InMemoryDataService implements InMemoryDbService {
         "installments": 5,
         "currencyId": "USD",
         "currencyFormat": "$",
-        "isFreeShipping": true
+        "isFreeShipping": true,
+        "img": ["img-7.jpg", "img-8.jpg"]
       },
 
       {
@@ -74,7 +78,8 @@ export class InMemoryDataService implements InMemoryDbService {
         "installments": 3,
         "currencyId": "USD",
         "currencyFormat": "$",
-        "isFreeShipping": true
+        "isFreeShipping": true,
+        "img": ["img-9.jpg", "img-10.jpg"]
       },
 
       {
@@ -88,7 +93,8 @@ export class InMemoryDataService implements InMemoryDbService {
         "installments": 5,
         "currencyId": "USD",
         "currencyFormat": "$",
-        "isFreeShipping": true
+        "isFreeShipping": true,
+        "img": ["img-11.jpg", "img-12.jpg"]
       },
 
       {
@@ -102,7 +108,8 @@ export class InMemoryDataService implements InMemoryDbService {
         "installments": 9,
         "currencyId": "USD",
         "currencyFormat": "$",
-        "isFreeShipping": true
+        "isFreeShipping": true,
+        "img": ["img-13.jpg", "img-14.jpg"]
       },
 
       {
@@ -116,7 +123,8 @@ export class InMemoryDataService implements InMemoryDbService {
         "installments": 9,
         "currencyId": "USD",
         "currencyFormat": "$",
-        "isFreeShipping": true
+        "isFreeShipping": true,
+        "img": ["img-15.jpg", "img-16.jpg"]
       },
 
       {
@@ -130,7 +138,8 @@ export class InMemoryDataService implements InMemoryDbService {
         "installments": 7,
         "currencyId": "USD",
         "currencyFormat": "$",
-        "isFreeShipping": true
+        "isFreeShipping": true,
+        "img": ["img-17.jpg", "img-18.jpg"]
       },
 
       {
@@ -144,7 +153,8 @@ export class InMemoryDataService implements InMemoryDbService {
         "installments": 7,
         "currencyId": "USD",
         "currencyFormat": "$",
-        "isFreeShipping": true
+        "isFreeShipping": true,
+        "img": ["img-19.jpg", "img-20.jpg"]
       },
 
       {
@@ -158,7 +168,8 @@ export class InMemoryDataService implements InMemoryDbService {
         "installments": 12,
         "currencyId": "USD",
         "currencyFormat": "$",
-        "isFreeShipping": false
+        "isFreeShipping": false,
+        "img": ["img-21.jpg", "img-22.jpg"]
       },
 
       {
@@ -172,7 +183,8 @@ export class InMemoryDataService implements InMemoryDbService {
         "installments": 9,
         "currencyId": "USD",
         "currencyFormat": "$",
-        "isFreeShipping": false
+        "isFreeShipping": false,
+        "img": ["img-23.jpg", "img-24.jpg"]
       },
 
       {
@@ -186,7 +198,8 @@ export class InMemoryDataService implements InMemoryDbService {
         "installments": 0,
         "currencyId": "USD",
         "currencyFormat": "$",
-        "isFreeShipping": true
+        "isFreeShipping": true,
+        "img": ["img-25.jpg", "img-26.jpg"]
       },
 
       {
@@ -200,7 +213,8 @@ export class InMemoryDataService implements InMemoryDbService {
         "installments": 4,
         "currencyId": "USD",
         "currencyFormat": "$",
-        "isFreeShipping": true
+        "isFreeShipping": true,
+        "img": ["img-27.jpg", "img-28.jpg"]
       },
 
       {
@@ -214,7 +228,8 @@ export class InMemoryDataService implements InMemoryDbService {
         "installments": 4,
         "currencyId": "USD",
         "currencyFormat": "$",
-        "isFreeShipping": false
+        "isFreeShipping": false,
+        "img": ["img-29.jpg", "img-30.jpg"]
       },
 
       {
@@ -228,7 +243,8 @@ export class InMemoryDataService implements InMemoryDbService {
         "installments": 5,
         "currencyId": "USD",
         "currencyFormat": "$",
-        "isFreeShipping": true
+        "isFreeShipping": true,
+        "img": ["img-31.jpg", "img-32.jpg"]
       },
 
       {
@@ -242,7 +258,8 @@ export class InMemoryDataService implements InMemoryDbService {
         "installments": 9,
         "currencyId": "USD",
         "currencyFormat": "$",
-        "isFreeShipping": true
+        "isFreeShipping": true,
+        "img": ["img-33.jpg", "img-34.jpg"]
       }
     ];
     return { products };
