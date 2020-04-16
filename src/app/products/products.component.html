@@ -1,18 +1,24 @@
 <div class="container">
-  <div class="filters">
-    <h4 class="title">Sizes:</h4>
-    <div class="filters-available-size" *ngFor="let size of sizes; let i = index">
-      <label>
-        <input type="checkbox"  (change)="onSelect(size, i, $event.target.checked)">
-        <span class="checkmark">{{ size.name }}</span>
-      </label>
+  <div class="row mt-5 d-flex justify-content-between">
+    <div class="col-4 filters">
+      <div class="filters-available-size" *ngFor="let size of sizes; let i = index">
+        <label>
+          <input type="checkbox"  (change)="onSelect(i, $event.target.checked)">
+          <span class="checkmark">{{ size.name }}</span>
+        </label>
+      </div>
+    </div>
+    <div class="col-3 input-group float-right">
+      <select name="order_by" class="custom-select" (change)="selectOption($event.target.value)">
+        <option [value]="item.id" *ngFor="let item of items">{{item.name}}</option>
+      </select>
     </div>
   </div>
 </div>
 
 <div class="container">
   <h3 class="h3">Shopping cart</h3>
-  <div class="row" *ngIf="!productLoadding">
+  <div class="row" *ngIf="isContentLoading">
     <div class="col-md-3 col-sm-6" *ngFor="let product of products">
       <div class="product-grid">
         <div class="product-image">
