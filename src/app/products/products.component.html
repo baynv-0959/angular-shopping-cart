@@ -1,48 +1,53 @@
-<div class="container">
-  <div class="row mt-5 d-flex justify-content-between">
-    <div class="col-4 filters">
-      <div class="filters-available-size" *ngFor="let size of sizes; let i = index">
-        <label>
-          <input type="checkbox"  (change)="onSelect(i, $event.target.checked)">
-          <span class="checkmark">{{ size.name }}</span>
-        </label>
+<div class="container-load" [ngClass]="{'d-none': loadSuccess}">
+  <div class="loader"></div>
+</div>
+<div class="main" [ngClass]="{'d-none': !loadSuccess}">
+  <div class="container">
+    <div class="row mt-5 d-flex justify-content-between">
+      <div class="col-4 filters">
+        <div class="filters-available-size" *ngFor="let size of sizes; let i = index">
+          <label>
+            <input type="checkbox"  (change)="onSelect(i, $event.target.checked)">
+            <span class="checkmark">{{ size.name }}</span>
+          </label>
+        </div>
+      </div>
+      <div class="col-3 input-group float-right">
+        <select name="order_by" class="custom-select" (change)="selectOption($event.target.value)">
+          <option [value]="item.id" *ngFor="let item of items">{{item.name}}</option>
+        </select>
       </div>
     </div>
-    <div class="col-3 input-group float-right">
-      <select name="order_by" class="custom-select" (change)="selectOption($event.target.value)">
-        <option [value]="item.id" *ngFor="let item of items">{{item.name}}</option>
-      </select>
-    </div>
   </div>
-</div>
 
-<div class="container">
-  <h3 class="h3">Shopping cart</h3>
-  <div class="row" *ngIf="isContentLoading">
-    <div class="col-md-3 col-sm-6" *ngFor="let product of products">
-      <div class="product-grid">
-        <div class="product-image">
-          <a href="#">
-            <img class="pic-1" src="assets/public/images/{{ product.img[0] }}">
-            <img class="pic-2" src="assets/public/images/{{ product.img[1] }}">
-          </a>
-          <ul class="social">
-            <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li>
-            <li><a href="#" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
-            <li><a href="#" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
-          </ul>
-          <span class="product-new-label">New</span>
-          <span class="product-discount-label">{{ product.isFreeShipping ? "Ship" : "No" }}</span>
-        </div>
-        <div class="product-content">
-          <h3 class="title"><a href="#">{{ product.title }}</a></h3>
-          <div class="price">
-            {{ [product.currencyFormat, product.price].join('') }}
+  <div class="container" *ngIf="loadSuccess">
+    <h3 class="h3">Shopping cart </h3><small class="font-weight-bold">({{ products.length }} products)</small>
+    <div class="row">
+      <div class="col-md-3 col-sm-6" *ngFor="let product of products">
+        <div class="product-grid">
+          <div class="product-image">
+            <a href="#">
+              <img class="pic-1" src="assets/public/images/{{ product.img[0] }}">
+              <img class="pic-2" src="assets/public/images/{{ product.img[1] }}">
+            </a>
+            <ul class="social">
+              <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li>
+              <li><a href="#" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
+              <li><a href="#" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+            </ul>
+            <span class="product-new-label">{{ product.id }}</span>
+            <span *ngIf="product.isFreeShipping" class="product-discount-label">{{ "FREE" }}</span>
           </div>
-          <div class="price">
-            {{ product.availableSizes.join(' - ') }}
+          <div class="product-content">
+            <h3 class="title"><a href="#">{{ product.title }}</a></h3>
+            <div class="price">
+              {{ [product.currencyFormat, product.price].join('') }}
+            </div>
+            <div class="price">
+              {{ product.availableSizes.join(' - ') }}
+            </div>
+            <a class="add-to-cart" href="">ADD TO CART</a>
           </div>
-          <a class="add-to-cart" href="">ADD TO CART</a>
         </div>
       </div>
     </div>
