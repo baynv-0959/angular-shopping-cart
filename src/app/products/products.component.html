@@ -46,10 +46,41 @@
             <div class="price">
               {{ product.availableSizes.join(' - ') }}
             </div>
-            <a class="add-to-cart" href="">ADD TO CART</a>
+            <button class="add-to-cart" (click)="addToCart(product)">ADD TO CART</button>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+<div class="float-cart float-cart--open" *ngIf="showCart" [ngClass]="{'d-none': !showCart}">
+  <div class="float-cart__close-btn">X</div>
+  <div class="float-cart__content">
+    <div class="float-cart__header"><span class="bag"><span class="bag__quantity">{{ countProducts() }}</span></span><span class="header-title">Cart</span></div>
+    <div class="float-cart__shelf-container">
+      <div class="shelf-item" *ngFor="let cart of carts">
+        <div class="shelf-item__del" (click)="removeCart(cart)">
+          <i class="fa fa-trash-o"></i>
+        </div>
+        <div class="shelf-item__thumb"><img src="assets/public/images/{{ cart.product.img[1] }}" alt="Dark Thug Blue-Navy T-Shirt"></div>
+        <div class="shelf-item__details">
+          <p class="title">{{ cart.product.title }}</p>
+          <p class="desc">{{ cart.product.style }}<br>Quantity: {{ cart.count }}</p>
+        </div>
+        <div class="shelf-item__price">
+          <p>{{ [cart.product.currencyFormat, cart.product.price].join('') }}</p>
+          <div><button class="change-product-button">-</button><button class="change-product-button">+</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="float-cart__footer">
+      <div class="sub">SUBTOTAL</div>
+      <div class="sub-price">
+        <p class="sub-price__val">$ {{ totalPrice() | number }}</p>
+        <small class="sub-price__installment"><span>OR UP TO 9 x $ {{ totalPrice()/9 | number }}</span></small>
+      </div>
+      <div class="buy-btn">Checkout</div>
     </div>
   </div>
 </div>
