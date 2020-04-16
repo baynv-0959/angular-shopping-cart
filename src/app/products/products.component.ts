@@ -11,8 +11,8 @@ import { Size } from '../shared/models/size'
 export class ProductsComponent implements OnInit {
   sizes: Size[];
   products: Product[];
-  productLoadding = false
-  inProgressSort = false
+  productLoadding = true
+  inProgressSort = true
   items: any[] = [
     { id: 0, name: 'Select' },
     { id: 1, name: 'Lowest to highest' },
@@ -34,27 +34,32 @@ export class ProductsComponent implements OnInit {
   }
 
   selectOption(selected: number) {
+    this.productLoadding = true;
     if(selected == 0) {
-      this.productLoadding = true;
       this.productService.filterProduct({ sizes: this.sizes.filter((value) => value["isSelected"]) })
       .subscribe(products => {
         this.products = products;
-        this.productLoadding = false;
+        setTimeout(() => { this.productLoadding = false }, 500);
       });
     } else if(selected == 1) {
       this.products.sort(function(a, b) {
         return a.id - b.id;
       });
+      setTimeout(() => { this.productLoadding = false }, 500);
     } else {
       this.products.sort(function(a, b) {
         return b.id - a.id;
       });
+      setTimeout(() => { this.productLoadding = false }, 500);
     }
   }
 
   getProducts(): void {
     this.productService.getProducts()
-      .subscribe(products => this.products = products);
+      .subscribe(products => {
+        this.products = products
+        this.productLoadding = false;
+      });
   }
 
   onSelect(index: number, isChecked: boolean): void {
@@ -67,7 +72,7 @@ export class ProductsComponent implements OnInit {
       });
   }
 
-  get isContentLoading(): boolean {
-    return !this.productLoadding || !this.inProgressSort;
+  get loadSuccess(): boolean {
+    return !(this.productLoadding && this.inProgressSort);
   }
 }
