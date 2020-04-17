@@ -380,6 +380,8 @@ h3.h3{
       width: 60px;
       height: 60px;
       cursor: pointer;
+      color: #fff;
+      padding: 8px;
 
       .bag__quantity {
         bottom: 5px;
@@ -401,6 +403,10 @@ h3.h3{
       position: absolute;
       bottom: -5px;
       right: 0px;
+    }
+
+    i {
+      font-size: 42px;
     }
   }
 
