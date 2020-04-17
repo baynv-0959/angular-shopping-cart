@@ -31,9 +31,9 @@
               <img class="pic-2" src="assets/public/images/{{ product.img[1] }}">
             </a>
             <ul class="social">
-              <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li>
-              <li><a href="#" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
-              <li><a href="#" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+              <li><a data-tip="Quick View"><i class="fa fa-eye"></i></a></li>
+              <li><a data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
+              <li><a data-tip="Add to Cart" (click)="addToCart(product)"><i class="fa fa-shopping-cart"></i></a></li>
             </ul>
             <span class="product-new-label">{{ product.id }}</span>
             <span *ngIf="product.isFreeShipping" class="product-discount-label">{{ "FREE" }}</span>
@@ -54,25 +54,31 @@
   </div>
 </div>
 
-<div class="float-cart float-cart--open" *ngIf="showCart" [ngClass]="{'d-none': !showCart}">
-  <div class="float-cart__close-btn">X</div>
+<div class="float-cart" [ngClass]="{'float-cart--open': showCart}">
+  <div [ngClass]="{'d-none': !showCart}" class="float-cart__close-btn" (click)="showCart = false">X</div>
+  <span [ngClass]="{'d-none': showCart}" class="bag bag--float-cart-closed" (click)="showCart = true"><i class="fa fa-shopping-cart"></i><span class="bag__quantity">{{ countProducts() }}</span></span>
   <div class="float-cart__content">
-    <div class="float-cart__header"><span class="bag"><span class="bag__quantity">{{ countProducts() }}</span></span><span class="header-title">Cart</span></div>
+    <div class="float-cart__header">
+      <span class="bag"><i class="fa fa-shopping-cart"></i><span class="bag__quantity">{{ countProducts() }}</span></span><span class="header-title">Cart</span>
+    </div>
     <div class="float-cart__shelf-container">
-      <div class="shelf-item" *ngFor="let cart of carts">
-        <div class="shelf-item__del" (click)="removeCart(cart)">
-          <i class="fa fa-trash-o"></i>
-        </div>
-        <div class="shelf-item__thumb"><img src="assets/public/images/{{ cart.product.img[1] }}" alt="Dark Thug Blue-Navy T-Shirt"></div>
+      <div class="shelf-item" [ngClass]="{'shelf-item--mouseover': lineThroughCart(cart)}" *ngFor="let cart of carts">
+        <div class="shelf-item__thumb"><img src="assets/public/images/{{ cart.product.img[1] }}" alt="{{ cart.product.name }}"></div>
         <div class="shelf-item__details">
           <p class="title">{{ cart.product.title }}</p>
           <p class="desc">{{ cart.product.style }}<br>Quantity: {{ cart.count }}</p>
         </div>
         <div class="shelf-item__price">
           <p>{{ [cart.product.currencyFormat, cart.product.price].join('') }}</p>
-          <div><button class="change-product-button">-</button><button class="change-product-button">+</button></div>
+          <div>
+            <button [disabled]="cart.count == 1" (click)="subProduct(cart.product)" class="change-product-button">-</button>
+            <button (click)="addProduct(cart.product)" class="change-product-button">+</button>
+            <button (click)="removeCart(cart)" (mouseover)="overRemove(cart)" (mouseout)="outRemove()" class="remove change-product-button"><i class="fa fa-trash-o"></i></button></div>
         </div>
       </div>
+
+      <p *ngIf="carts.length == 0" class="shelf-empty">Add some products in the cart <br>:)</p>
+
     </div>
     <div class="float-cart__footer">
       <div class="sub">SUBTOTAL</div>
@@ -80,7 +86,7 @@
         <p class="sub-price__val">$ {{ totalPrice() | number }}</p>
         <small class="sub-price__installment"><span>OR UP TO 9 x $ {{ totalPrice()/9 | number }}</span></small>
       </div>
-      <div class="buy-btn">Checkout</div>
+      <div (click)="checkout()" class="buy-btn">Checkout</div>
     </div>
   </div>
 </div>

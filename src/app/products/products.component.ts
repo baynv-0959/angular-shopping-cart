@@ -14,6 +14,7 @@ export class ProductsComponent implements OnInit {
   inProgressSort = true;
   inProgressLoadCart = false;
   showCart = false;
+  isRemoveCart = false;
   sizes: Size[];
   products: Product[];
   carts: Cart[];
@@ -23,6 +24,7 @@ export class ProductsComponent implements OnInit {
     { id: 2, name: 'Highest to lowest' }
   ];
   selected: number = 0;
+  cartRemove: null;
 
   constructor(private productService: ProductService) { }
 
@@ -99,7 +101,6 @@ export class ProductsComponent implements OnInit {
     let index = this.carts.findIndex(isLargeNumber);
     if (index !== -1) this.carts.splice(index, 1);
     this.inProgressLoadCart = false;
-    debugger
     localStorage.setItem('carts', JSON.stringify(this.carts));
   }
 
@@ -131,5 +132,46 @@ export class ProductsComponent implements OnInit {
     return this.carts.map((cart) => {
       return cart.count
     }).reduce((accumulator, currentValue) => accumulator + currentValue);
+  }
+
+  addProduct(product: Product): void {
+    this.inProgressLoadCart = true;
+    const isLargeNumber = (element) => element.product.id == product.id;
+    let index = this.carts.findIndex(isLargeNumber);
+    this.carts[index]["count"] ++;
+    this.inProgressLoadCart = false;
+    localStorage.setItem('carts', JSON.stringify(this.carts));
+  }
+
+  subProduct(product: Product): void {
+    this.inProgressLoadCart = true;
+    const isLargeNumber = (element) => element.product.id == product.id;
+    let index = this.carts.findIndex(isLargeNumber);
+    this.carts[index]["count"] --;
+    this.inProgressLoadCart = false;
+    localStorage.setItem('carts', JSON.stringify(this.carts));
+  }
+
+  hiddenCart(): void {
+    this.showCart = false;
+  }
+
+  overRemove(cart): void {
+    this.cartRemove = cart
+  }
+
+  outRemove(): void {
+    this.cartRemove = null;
+  }
+
+  lineThroughCart(cart: Cart): boolean {
+    return cart == this.cartRemove
+  }
+
+  checkout() {
+    alert("Total money: $" + this.totalPrice());
+    this.carts = [];
+    this.showCart = false;
+    localStorage.setItem('carts', JSON.stringify([]));
   }
 }
